@@ -6,7 +6,12 @@ from sklearn.model_selection import train_test_split
 # Load dataset
 #dataset_path = "/mnt/data/S08.071.dataset.csv"
 #dataset_path = "./S08.071.dataset.csv"
-dataset_path = "./S01.247.dataset.csv"
+#dataset_path = "./S01.247.dataset.csv"
+protease_name = "C01.032"
+dataset_path = f"./{protease_name}.dataset.csv"
+train_path = f"./{protease_name}.train.csv"
+test_path = f"./{protease_name}.test.csv"
+
 df = pd.read_csv(dataset_path)
 
 # Train/test split (80/20) with stratification
@@ -22,8 +27,8 @@ train_df, test_df = train_test_split(
 #test_path = "/mnt/data/S08.071.test.csv"
 #train_path = "./S08.071.train.csv"
 #test_path = "./S08.071.test.csv"
-train_path = "./S01.247.train.csv"
-test_path = "./S01.247.test.csv"
+#train_path = "./S01.247.train.csv"
+#test_path = "./S01.247.test.csv"
 
 
 train_df.to_csv(train_path, index=False)

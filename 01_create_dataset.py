@@ -5,9 +5,12 @@ import pandas as pd
 #neg_path = "/mnt/data/negative_pattern_one_letter_aa_S08.071.csv"
 #pos_path = "./cleave_pattern_one_letter_aa_S08.071.csv"
 #neg_path = "./negative_pattern_one_letter_aa_S08.071.csv"
-pos_path = "./cleave_pattern_one_letter_aa_S01.247.csv"
-neg_path = "./negative_pattern_one_letter_aa_S01.247.csv"
-
+#pos_path = "./cleave_pattern_one_letter_aa_S01.247.csv"
+#neg_path = "./negative_pattern_one_letter_aa_S01.247.csv"
+protease_name = "C01.032"
+pos_path = f"./positive_{protease_name}.csv"
+neg_path = f"./negative_{protease_name}.csv"
+dataset_path = f"./{protease_name}.dataset.csv"
 
 # Load data
 pos_df = pd.read_csv(pos_path)
@@ -38,18 +41,28 @@ neg_removed.to_csv(neg_removed_path, index=False)
 dataset = pd.DataFrame(columns=["seq", "label"])
 
 # Add positive data
-pos_sequences = pos_clean["cleave_pattern"].dropna()
-pos_data = pd.DataFrame({
-    "seq": pos_sequences,
-    "label": 1
-})
+#pos_sequences = pos_clean["cleave_pattern"].dropna()
+#pos_sequences = pos_clean["seq"].dropna
+#df = df[df["seq"].notna()]
+pos_sequences = pos_clean[pos_clean["seq"].notna()]
+pos_sequences["label"] = 1
+pos_data = pos_sequences
+#pos_data = pd.DataFrame({
+#    "seq": pos_sequences,
+#    "label": 1
+#})
 
 # Add negative data
-neg_sequences = neg_clean["negative_pattern"].dropna()
-neg_data = pd.DataFrame({
-    "seq": neg_sequences,
-    "label": 0
-})
+#neg_sequences = neg_clean["negative_pattern"].dropna()
+# neg_sequences = neg_clean["seq"].dropna()
+#neg_sequences = neg_clean["seq"].dropna()
+neg_sequences = neg_clean[neg_clean["seq"].notna()]
+neg_sequences["label"] = 0
+neg_data = neg_sequences
+#neg_data = pd.DataFrame({
+#    "seq": neg_sequences,
+#    "label": 0
+#})
 
 # Combine
 dataset = pd.concat([pos_data, neg_data], ignore_index=True)
@@ -57,8 +70,9 @@ dataset = pd.concat([pos_data, neg_data], ignore_index=True)
 # Save dataset
 #dataset_path = "/mnt/data/S08.071.dataset.csv"
 #dataset_path = "./S08.071.dataset.csv"
-dataset_path = "./S01.247.dataset.csv"
+#dataset_path = "./S01.247.dataset.csv"
+
 dataset.to_csv(dataset_path, index=False)
 
-pos_removed_path, neg_removed_path, dataset_path
+#pos_removed_path, neg_removed_path, dataset_path
 
