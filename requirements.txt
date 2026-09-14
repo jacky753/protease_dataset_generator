@@ -1,6 +1,4 @@
-numpy
-pandas
-matplotlib
-scikit-learn
-tensorflow
-protein-bert
+numpy>=1.24
+pandas>=2.0
+# Needed only when SUBSTRATE_SOURCE=mysql
+mysqlclient>=2.2

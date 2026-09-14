@@ -1,10 +1,10 @@
 
 # short explain
-ProteaseDatasetGenerator — where positive data consists of N-mer segments spanning protease cleavage sites and negative data consists of randomly selected N-mer segments from non-cleavage regions
+
 
 # explain
-First, Protease datasets are made by this program. 
-Second, other git repository, protease_sim_n_mer use these datasets for learning datasets and predict the cleavage probability scores on the spike protein of SARS-CoV-2 variants.
+
+
 
 # Protease dataset generator - SOLID refactor
 

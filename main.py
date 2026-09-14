@@ -1,19 +1,26 @@
+from __future__ import annotations
+
 import time
 
-from protease_rf import AppConfig
-from protease_rf.app import build_and_run
+from protease_dataset.bootstrap import build_application
+from protease_dataset.config import AppConfig
 
 
 def main() -> None:
-    build_and_run(AppConfig())
+    started = time.perf_counter()
+    config = AppConfig.from_env()
+    app = build_application(config)
+    try:
+        summary = app.run()
+    finally:
+        app.close()
+
+    elapsed = time.perf_counter() - started
+    print("=== Dataset generation complete ===")
+    print(summary)
+    print(f"elapsed_seconds={elapsed:.3f}")
+    print(f"elapsed_minutes={elapsed / 60:.3f}")
 
 
 if __name__ == "__main__":
-    start = time.time()
     main()
-    elapsed = time.time() - start
-    print(elapsed)
-    print(elapsed / 60)
-    print(elapsed / 60 / 60)
-    print(elapsed / 60 / 60 / 24)
-    print("END.")
